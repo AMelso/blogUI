@@ -6,5 +6,3 @@ export default ({ message, info, postive, warning, negative }) => (
     {message}
   </Message>
 )
-
-
