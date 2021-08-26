@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import {NavLink} from 'react-router-dom'
 import axios from 'axios'
-import {Divider, Image, Item, Header} from 'semantic-ui-react'
+import {Divider,Item, Header} from 'semantic-ui-react'
 import Loader from '../components/Loader';
 import Message from '../components/Message'
 
@@ -38,7 +39,9 @@ const PostList = () => {
             <Item key={post.id}>
               <Item.Image size='small' src={post.thumbnail} />
               <Item.Content>
-                <Item.Header as='a'>{post.title}</Item.Header>
+                <NavLink to={`/posts/${post.slug}`}>
+                  <Item.Header as='h3'>{post.title}</Item.Header>
+                </NavLink>
                 <Item.Description>{post.Content}</Item.Description>
               </Item.Content>
             </Item>
