@@ -4,6 +4,7 @@ import axios from 'axios'
 import Loader from '../components/Loader';
 import Message from '../components/Message'
 import { useParams } from 'react-router-dom';
+import {api} from "../api"
 
 const PostDetail = () => {
 
@@ -18,7 +19,7 @@ const PostDetail = () => {
     async function fetchData() {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:8000/posts/${postSlug}`);
+        const res = await axios.get(api.posts.retrieve(postSlug));
         setPost(res.data)
         setLoading(false)
       } catch (error) {

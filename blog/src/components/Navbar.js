@@ -13,8 +13,8 @@ const Navbar = () => (
         <Menu.Item as='a' header>
           React Markdown Blog
         </Menu.Item>
-        <NavLink to='/'><Menu.Item as='li'>Posts</Menu.Item></NavLink>
-        <NavLink to='/create'><Menu.Item as='li'>Create a Post</Menu.Item></NavLink>
+        <NavLink to='/posts'><Menu.Item as='li'>Posts</Menu.Item></NavLink>
+        <NavLink to='/posts/create'><Menu.Item as='li'>Create a Post</Menu.Item></NavLink>
       </Container>
     </Menu>
   </div>
