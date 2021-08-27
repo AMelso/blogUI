@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/posts" component={PostList} />
           <Route exact path="/posts/create" component={PostCreate} />
           <Route exact path="/posts/:postSlug" component={PostDetail} />
-          <Route path="/posts/:postSlug/update" component={PostUpdate} />
+          <Route exact path="/posts/:postSlug/update" component={PostUpdate} />
           <Route path="/posts/:postSlug/delete" component={PostDelete} />
 
         </Switch>

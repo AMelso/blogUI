@@ -53,7 +53,6 @@ const PostCreate = () => {
             {error && (
                 <Message danger message={error} />
             )}
-            {thumbnail && <Message info message={`Selected image: ${thumbnail.name}`} />}
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
                     <label>Title</label>
@@ -86,6 +85,7 @@ const PostCreate = () => {
                 </Form.Field>
                 <Button primary fluid loading={loading} disabled={loading} type='submit'>Submit</Button>
             </Form>
+            {thumbnail && <Message info message={`Selected image: ${thumbnail.name}`} />}
         </div>
     )
 }

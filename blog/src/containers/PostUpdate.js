@@ -19,7 +19,7 @@ import {api} from "../api"
 
 //content=markdown
 const PostUpdateForm = ({ postSlug, initialTitle, initialContent, initialThumbnail }) => {
-  
+
       // state setup
       const [error, setError] = useState(null)
       const [loading, setLoading] = useState(false)
@@ -42,7 +42,8 @@ const PostUpdateForm = ({ postSlug, initialTitle, initialContent, initialThumbna
         setLoading(true);
 
         const formData = new FormData()
-        formData.append("thumbnail", thumbnail)
+        // if thumbnail not null append, state initializes it as null, dont want to update to null
+        if (thumbnail) formData.append("thumbnail", thumbnail)
         formData.append("title", title)
         formData.append("content", markdown)
         axios
@@ -68,45 +69,47 @@ const PostUpdateForm = ({ postSlug, initialTitle, initialContent, initialThumbna
       {error && <Message negative message={error} />}
       {currentThumbnail && <Image src={currentThumbnail} size="small" />}
       <Divider />
+      
       <Form onSubmit={handleSubmit}>
-                <Form.Field>
-                    <label>Title</label>
-                    <input 
-                        placeholder='Title of your post' 
-                        value={title} 
-                        onChange={e => setTitle(e.target.value)}
-                    />
-                </Form.Field>
-                <MdEditor
-                    value={markdown}
-                    style={{ height: "500px" }}
-                    renderHTML={(text) => mdParser.render(text)}
-                    onChange={({text}) => setMarkdown(text)}
-                />
-                <Form.Field>
-                    <Button
-                        type="button"
-                        fluid
-                        content="Choose a thumbnail" 
-                        labelPosition="left" 
-                        icon="file"
-                        onClick={() => fileInputRef.current.click()}
-                    />
-                    <input 
-                        ref={fileInputRef} 
-                        type="file" 
-                        hidden
-                        onChange={e => setThumbnail(e.target.files[0])}
-                    />
-                </Form.Field>
-                <Button primary fluid loading={loading} disabled={loading} type='submit'>Submit</Button>
-            </Form>
+        <Form.Field>
+            <label>Title</label>
+            <input 
+                placeholder='Title of your post' 
+                value={title} 
+                onChange={e => setTitle(e.target.value)}
+            />
+        </Form.Field>
+        <MdEditor
+            value={markdown}
+            style={{ height: "500px" }}
+            renderHTML={(text) => mdParser.render(text)}
+            onChange={({text}) => setMarkdown(text)}
+        />
+        <Form.Field>
+          <Button
+            type="button"
+            fluid
+            content="Choose a thumbnail" 
+            labelPosition="left" 
+            icon="file"
+            onClick={() => fileInputRef.current.click()}
+          />
+          <input 
+            ref={fileInputRef} 
+            type="file" 
+            hidden
+            onChange={e => setThumbnail(e.target.files[0])}
+          />
+        </Form.Field>
+        <Button primary fluid loading={loading} disabled={loading} type='submit'>Submit</Button>
+      </Form>
+      {thumbnail && <Message info message={`Selected image: ${thumbnail.name}`} />}
     </div>
   )
 }
 
 const PostUpdate = () => {
-  const { postSlug } = useParams();
+  const { postSlug } = useParams()
   const {data, loading, error} = useFetch(api.posts.retrieve(postSlug))
   return (
     <>
