@@ -9,6 +9,7 @@ import Message from '../components/Message';
 import { api } from '../api';
 
 const PostCreate = () => {
+    // state setup
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
     
@@ -16,8 +17,9 @@ const PostCreate = () => {
     const [markdown, setMarkdown] = useState(null)
     const [thumbnail, setThumbnail] = useState(null)
 
+    //get set as new instance, need for markdown text
     const mdParser = new MarkdownIt();
-
+    //image upload
     const fileInputRef = useRef()
 
     function handleSubmit(e) {
